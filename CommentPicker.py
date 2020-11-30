@@ -30,13 +30,6 @@ def win_function(lengths):
     giveaways_count = max_wins_of_one_life = previous_max_wins = 0
     while low < high:
         win_count = giveaway = 0
-        #if flag == 1:   # Generate new set of users every lifetime for more randomness
-        #    generate_users(NUM_OF_USERS)
-        #    flag = 0
-        #print(users[l:h])
-        #if int(lengths[2]) == 0:
-        #    generate_users(NUM_OF_USERS)   
-        #    print(users)     
         while giveaway < GIVEAWAYS:
             winner = np.random.choice(users)
             if winner == "XRHS":
@@ -67,8 +60,8 @@ if __name__ == '__main__':
     sizeSegment = NUM_OF_LIVES / procs
     print("Running",procs,"processes in parallel")
     print("Calculating...")
-    #print("For NUM_OF_LIVES > 1000 expect more than 13 seconds runtime")
-    #print("For NUM_OF_LIVES > 10000 expect more than 130 seconds runtime")
+    print("For NUM_OF_LIVES > 1000 expect more than 13 seconds runtime")
+    print("For NUM_OF_LIVES > 10000 expect more than 130 seconds runtime")
 
     jobs = []
     for i in range(0, procs):
@@ -92,11 +85,11 @@ if __name__ == '__main__':
     # Mathematical formula of probability (credits to Vsauce2)
     formula1 = 1 - (1 - 1 / NUM_OF_USERS) ** GIVEAWAYS
     formula2 = (1 - 1 / NUM_OF_USERS) ** (GIVEAWAYS * NUM_OF_LIVES)
-    print("\nThe probability of not winning any giveaway in any lifetime is:",round(formula2 * 100,3),"%")
+    print("\nThe probability of winning at least 1 giveaway out of", GIVEAWAYS, "with", NUM_OF_USERS, "participants is:",round(formula1 * 100,3),"%")
     if give != 0:
-        print("\nFor", NUM_OF_LIVES, "lifetimes, each of",GIVEAWAYS,"giveaways\nyou... :")
-        print("\nWill never win ma friend .|.")
-        #print("\nMost wins for a single lifetime:", max_wins)
+        print("\nFor", NUM_OF_LIVES, "lifetimes, each of", GIVEAWAYS, "giveaways\nyou won:", give)
+        print("\nThe probability of not winning any giveaway in any lifetime is:",round(formula2 * 100,3),"%")
+        print("\nMost wins for a single lifetime:", max_wins)
     else:
         print("\nYou will never win ma friend .|.")
     print(f'\nFinished in {round(finish-start,2)} seconds')
